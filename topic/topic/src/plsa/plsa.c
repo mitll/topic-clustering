@@ -1471,27 +1471,29 @@ void print_plsa_summary ( PLSA_SUMMARY *summary, int eval_topics, char *file_out
   }
 
   // Print out the characterization of the document collection
-  fprintf(fp,"***********************************\n");
-  fprintf(fp,"*** Document Collection Summary ***\n");
-  fprintf(fp,"***********************************\n");
-  fprintf(fp,"---- ------ ----- ------ ----- ");
-  if ( eval_topics ) fprintf(fp,"------ ");
-  fprintf(fp," ----------------\n");
-  fprintf(fp,"            Topic    Doc  %% of ");
-  if ( eval_topics ) fprintf (fp," Topic"); 
-  fprintf(fp,"\n");
-  fprintf(fp,"   #  Index Score Purity  Docs ");
-  if ( eval_topics ) fprintf (fp,"Purity "); 
-  fprintf(fp," Summary\n");
-  fprintf(fp,"---- ------ ----- ------ ----- ");
-  if ( eval_topics ) fprintf(fp,"------ ");
-  fprintf(fp," ----------------\n");
+  // fprintf(fp,"***********************************\n");
+  // fprintf(fp,"*** Document Collection Summary ***\n");
+  // fprintf(fp,"***********************************\n");
+  // fprintf(fp,"---- ------ ----- ------ ----- ");
+  // if ( eval_topics ) fprintf(fp,"------ ");
+  // fprintf(fp," ----------------\n");
+  // fprintf(fp,"            Topic    Doc  %% of ");
+  // if ( eval_topics ) fprintf (fp," Topic"); 
+  // fprintf(fp,"\n");
+  // fprintf(fp,"   #  Index Score Purity  Docs ");
+  // if ( eval_topics ) fprintf (fp,"Purity "); 
+  // fprintf(fp," Summary\n");
+  // fprintf(fp,"---- ------ ----- ------ ----- ");
+  // if ( eval_topics ) fprintf(fp,"------ ");
+  // fprintf(fp," ----------------\n");
+  fprintf(fp, "index\ttopic_score\tdoc_purity\tpercent_docs\tsummary\n");
   
   int i, f, w, t;
   for ( i=0; i<num_topics; i++ ) {
     z = index_map[i];
-    fprintf (fp,"%4d (%4d) %5.2f  %5.3f %5.2f ", 
-	     i+1, z, summary->z_score[z], summary->z_to_D_purity[z], 100*summary->P_z[z] );
+    // fprintf (fp,"%4d (%4d) %5.2f  %5.3f %5.2f ", 
+	 //    i+1, z, summary->z_score[z], summary->z_to_D_purity[z], 100*summary->P_z[z] );
+    fprintf (fp,"%4d\t%5.2f\t%5.3f\t%5.2f ", i, summary->z_score[z], summary->z_to_D_purity[z], 100*summary->P_z[z] );
     if ( eval_topics ) fprintf (fp," %5.3f ", summary->z_to_T_purity[z]);
     for ( f=0; f<num_summary_features; f++ ) {
       w = summary->summary_features[z][f];

@@ -273,7 +273,7 @@ if (do_topic):
         print 'Topic clustering succeeded!'
         fn_summary = output_dir + fn_table + '.{}.summary.txt'.format(num_topics)
         cmd = '{}/bin/plsa_analysis -plsa_model_in {} '.format(dir_topic, fn_model) + \
-            ' -summarize > {}'.format(fn_summary)
+            ' -summary_out {}'.format(fn_summary)
         print('Running command: {}'.format(cmd))
         status = os.system(cmd)
         fn_d2z = output_dir + fn_table + '.{}.d2z.txt'.format(num_topics)
