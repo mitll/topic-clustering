@@ -282,5 +282,20 @@ if (do_topic):
         print('Running command: {}'.format(cmd))
         status = os.system(cmd)
         
+        # open d2z file and prepend id to each line
+        d2z_file = open(fn_d2z, 'r')
+        fn_d2z_tmp = fn_d2z + ".tmp"
+        if (os.path.exists(fn_d2z_tmp)):
+            os.remove(fn_d2z_tmp)
+        d2z_tmp_file = open(fn_d2z_tmp, 'w')
+        counts_file = open(fn_counts, 'r')
+        for ln in d2z_file:
+            ln_count = counts_file.readline()
+            f = ln_count.split(' ')
+            d2z_tmp_file.write('{}\t{}'.format(f[0], ln))
+        counts_file.close()
+        d2z_file.close()
+        d2z_tmp_file.close()
+        os.rename(fn_d2z_tmp, fn_d2z)
     fn_out = output_dir + fn_table + '.simple.counts.pckl'
     mt.save_msg(data_table, fn_out)

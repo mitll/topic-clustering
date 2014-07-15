@@ -315,11 +315,12 @@ void write_d2z_counts_to_file ( PLSA_MODEL *plsa_model, char *filename )
     for ( z=0; z<num_topics; z++) z_mapping[z] = z;
   }
   FILE *fp = fopen_safe ( filename, "w" );
-  for ( d=0; d<plsa_model->num_documents; d++ ) {
+  for (d=0; d<plsa_model->num_documents; d++ ) {
+
     for ( i=0; i<num_topics; i++ ) {
       z = z_mapping[i];
       // fprintf( fp, " %.6f", plsa_model->num_words_in_d[d] * plsa_model->P_z_given_d[z][d] );
-      fprintf( fp, " %.6f", plsa_model->P_z_given_d[z][d] );
+      fprintf( fp, "\t%.6f", plsa_model->P_z_given_d[z][d] );
     }
     fprintf (fp, "\n");
   }
