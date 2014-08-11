@@ -222,7 +222,7 @@ if (do_topic):
     stop_list = arg_table.get(STOP_LIST_KEY, dir_topic + '/data/stop_list_kiva.txt')
     tf_cutoff = arg_table.get(TF_CUTOFF_KEY, 3)
     df_cutoff = arg_table.get(DF_CUTOFF_KEY, 0.25)
-    language_filter = arg_table.get(LANG_FILTER_KEY,'en')
+    language_filter = arg_table.get(LANG_FILTER_KEY,'none')
     
     # Load data if it's not loaded
     if (not simple_loaded):
@@ -241,7 +241,8 @@ if (do_topic):
             print "{} ".format(num),
             sys.stdout.flush()
         xact = data_table[ky]
-        if (xact['lid_lui'] != language_filter):  # do topic only English only
+        if ((language_filter != 'none') and (xact['lid_lui'] != language_filter)):  # do topic only for docs that match language filter
+			print('Not processing transaction {}'.format(xact))
             continue
         # Topic normalization
         topic_norm.normalize_msg(xact, rw_hash, debug)
