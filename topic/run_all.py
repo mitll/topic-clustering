@@ -242,7 +242,7 @@ if (do_topic):
             sys.stdout.flush()
         xact = data_table[ky]
         if ((language_filter != 'none') and (xact['lid_lui'] != language_filter)):  # do topic only for docs that match language filter
-			print('Not processing transaction {}'.format(xact))
+            print('Not processing transaction {}'.format(xact))
             continue
         # Topic normalization
         topic_norm.normalize_msg(xact, rw_hash, debug)
